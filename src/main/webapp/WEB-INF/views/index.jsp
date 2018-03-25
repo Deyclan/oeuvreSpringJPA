@@ -25,7 +25,7 @@
 	<div class="list-group">
 		<a href="ajouterAdherent" class="list-group-item">Ajout Adhérent</a>
 		<a href="listerAdherent" class="list-group-item">Lister les adhérents</a>
-		<a href="home" class="list-group-item">Gestion des oeuvres</a>
+		<a href="gererOeuvre" class="list-group-item">Gestion des oeuvres</a>
 		<a href="javascript:fermer()" class="list-group-item">Quitter</a>
 	</div>
 </body>

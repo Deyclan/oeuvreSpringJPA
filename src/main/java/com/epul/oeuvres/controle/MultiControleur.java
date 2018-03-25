@@ -17,7 +17,7 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 
 
-import com.epul.oeuvres.dao.Service;
+import com.epul.oeuvres.dao.*;
 import com.epul.oeuvres.meserreurs.*;
 import com.epul.oeuvres.metier.*;
 
@@ -34,7 +34,7 @@ import org.springframework.ui.Model;
 import java.util.*;
 
 ///
-/// Les méthode du contrôleur répondent à des sollicitations
+/// Les mï¿½thode du contrï¿½leur rï¿½pondent ï¿½ des sollicitations
 /// des pages JSP
 
 @Controller
@@ -67,11 +67,35 @@ public class MultiControleur {
     }
 
     // /
-    // / Affichage de la page d'accueil
+    // / Affichage de la page d'accueil oeuvre suite Ã  une connexion
     // /
-    @RequestMapping(value = "home", method = RequestMethod.GET)
-    public ModelAndView home(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        return new ModelAndView("home");
+    @RequestMapping(value = "seConnecter", method = RequestMethod.POST)
+    public ModelAndView connexion(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        Boolean canConnect = false;
+        String destinationPage;
+        try {
+            // TODO : session start?
+            Service unService = new Service();
+            canConnect = unService.seConnecter(request.getParameter("username"), request.getParameter("password"));
+            destinationPage = canConnect ? "accueil" : "seConnecter";
+        } catch (Exception e) {
+            request.setAttribute("MesErreurs", e.getMessage());
+            destinationPage = "Erreur";
+        }
+	    return new ModelAndView(destinationPage);
+    }
+    @RequestMapping(value = "seDeconnecter", method = RequestMethod.POST)
+    public ModelAndView deconnexion(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        // TODO : session quit?
+	    return new ModelAndView("index");
+    }
+
+    // /
+    // / Affichage de la page d'accueil oeuvre
+    // /
+    @RequestMapping(value = "accueil", method = RequestMethod.GET)
+    public ModelAndView accueil(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        return new ModelAndView("accueil");
     }
 
 	// /

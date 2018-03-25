@@ -12,7 +12,7 @@
 	<title>Affichage de tous les adhérents</title>
 </head>
 <body>
-	<P><A href="index.jsp">Retour accueil</A></P>
+	<P><A href="/">Retour accueil</A></P>
 	<h2 class="text-center"> Listing des Adhérents </h2>
 
 	<TABLE BORDER="1" class="table table-responsive table-hover borderless">

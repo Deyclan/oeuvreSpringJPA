@@ -2,7 +2,11 @@ package com.epul.oeuvres.controle;
 
 import com.epul.oeuvres.dao.ServiceAdherent;
 import com.epul.oeuvres.dao.ServiceOeuvrePret;
+import com.epul.oeuvres.dao.ServiceOeuvreVente;
+import com.epul.oeuvres.dao.ServiceProprietaire;
 import com.epul.oeuvres.metier.AdherentEntity;
+import com.epul.oeuvres.metier.OeuvreventeEntity;
+import com.epul.oeuvres.metier.ProprietaireEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,26 +19,103 @@ public class OeuvreControleur {
 
     @RequestMapping( value = "gererOeuvre")
     public ModelAndView gererOeuvre(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String destinationPage = "gererOeuvre";
+        String destinationPage = "";
+        try {
+            destinationPage = "seConnecter";
+        } catch (Exception e) {
+            request.setAttribute("MesErreurs", e.getMessage());
+            destinationPage = "Erreur";
+        }
         return new ModelAndView(destinationPage);
     }
 
     @RequestMapping( value = "ajouterOeuvre")
     public ModelAndView ajouterOeuvre(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String destinationPage = "ajouterOeuvre";
+        String destinationPage;
+        try {
+            ServiceProprietaire unService = new ServiceProprietaire();
+            request.setAttribute("proprietaires", unService.getListProprietaire());
+            destinationPage = "ajouterOeuvre";
+        } catch (Exception e) {
+            request.setAttribute("MesErreurs", e.getMessage());
+            destinationPage = "Erreur";
+        }
+        return new ModelAndView(destinationPage);
+    }
+
+    @RequestMapping( value = "insererOeuvre")
+    public ModelAndView insererOeuvre(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String destinationPage;
+        try {
+            OeuvreventeEntity uneOeuvre = new OeuvreventeEntity();
+            uneOeuvre.setTitreOeuvrevente(request.getParameter("txttitre"));
+            uneOeuvre.setEtatOeuvrevente("L");
+            uneOeuvre.setPrixOeuvrevente(Float.parseFloat(request.getParameter("txtprix")));
+            // TODO : choix Propriétaire?
+//            ServiceProprietaire unService = new ServiceProprietaire();
+//            ProprietaireEntity myP = unService.getProprietaireByName(request.getParameter("txtpropietaire"));
+//            uneOeuvre.setProprietaire(myP);
+            ServiceOeuvreVente serviceOeuvreVente = new ServiceOeuvreVente();
+            serviceOeuvreVente.insertOeuvreVente(uneOeuvre);
+            destinationPage = "accueil";
+        } catch (Exception e) {
+            request.setAttribute("MesErreurs", e.getMessage());
+            destinationPage = "Erreur";
+        }
         return new ModelAndView(destinationPage);
     }
 
     @RequestMapping( value = "listerOeuvre")
     public ModelAndView listerOeuvre(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String destinationPage = "listerOeuvre";
+        String destinationPage;
+        try {
+            ServiceOeuvreVente serviceOeuvreVente = new ServiceOeuvreVente();
+            request.setAttribute("mesOeuvres", serviceOeuvreVente.getListOeuvreVente());
+            destinationPage = "listerOeuvre";
+        } catch (Exception e) {
+            request.setAttribute("MesErreurs", e.getMessage());
+            destinationPage = "Erreur";
+        }
         return new ModelAndView(destinationPage);
     }
 
-    @RequestMapping( value = "gererReservations")
-    public ModelAndView gererReservation(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String destinationPage = "gererReservation";
+    @RequestMapping( value = "modifierOeuvre")
+    public ModelAndView modifierOeuvre(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String destinationPage;
+        try{
+            ServiceOeuvreVente serviceOeuvreVente = new ServiceOeuvreVente();
+            OeuvreventeEntity uneO = serviceOeuvreVente.getOeuvreVenteByIdOeuvre(Integer.parseInt(request.getParameter("modif")));
+            request.setAttribute("oeuvreAModifier", uneO);
+            //TODO proprietaire
+            //request.setAttribute("proprietaires", unS.listeProprietaires());
+            destinationPage = "modifierOeuvre";
+        } catch (Exception e){
+            request.setAttribute("MesErreurs", e.getMessage());
+            destinationPage = "Erreur";
+        }
         return new ModelAndView(destinationPage);
     }
+
+    @RequestMapping( value = "sauvegarderOeuvre")
+    public ModelAndView sauvegarderOeuvre(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String destinationPage;
+        try {
+            ServiceOeuvreVente unService = new ServiceOeuvreVente();
+            OeuvreventeEntity uneOeuvre = unService.getOeuvreVenteByIdOeuvre(Integer.parseInt(request.getParameter("txtIDOeuvre")));
+            uneOeuvre.setTitreOeuvrevente(request.getParameter("txttitre"));
+            uneOeuvre.setEtatOeuvrevente("L");
+            uneOeuvre.setPrixOeuvrevente(Float.parseFloat(request.getParameter("txtprix")));
+            // TODO : propriétaire?
+            //Proprietaire myP = unService.rechercherProprietaire(request.getParameter("txtpropietaire"));
+            //uneOeuvre.setProprietaire(myP);
+            unService.updateOeuvre(uneOeuvre);
+            destinationPage = "accueil";
+        } catch (Exception e) {
+            request.setAttribute("MesErreurs", e.getMessage());
+            destinationPage = "Erreur";
+        }
+        return new ModelAndView(destinationPage);
+    }
+
 
 }

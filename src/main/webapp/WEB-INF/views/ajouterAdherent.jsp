@@ -16,10 +16,10 @@
 
 
 <body>
-<P><A href="index.jsp">Retour accueil</A></P>
+<P><A href="/">Retour accueil</A></P>
 <H2 class="text-center"> Ajout d'un adhérent </H2>
 <br/>
-    <FORM name='identification' method="post" action="Controleur?action=insererAdherent" onsubmit="return teste()">
+    <FORM name='identification' method="post" action="insererAdherent" onsubmit="return teste()">
         <div class="form-group">
             <label for="nom"> Nom de l'adhérent : </label>
             <INPUT type="text" class="form-control" name="txtnom" value="" id="nom">

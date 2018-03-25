@@ -9,31 +9,35 @@ import javax.persistence.EntityTransaction;
 
 public class Service extends EntityService{
 
-	/* Insertion d'un adherent
-	 * param Adherent unAdherent
-	 * */
-	public void insertAdherent(AdherentEntity unAdherent) throws MonException {
-		try
-		{
-			EntityTransaction transac = startTransaction();
-			transac.begin();
-			entityManager.persist(unAdherent);
-			transac.commit();
-			entityManager.close();
-		}
-		catch (RuntimeException e)
-		{
-			new MonException("Erreur de lecture", e.getMessage());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+/* Connexion selon user et password*/
+
+    public boolean seConnecter(String user, String password){
+        Map mParams = new HashMap();
+        Map mParam;
+        List<Object> rs;
+        Boolean canLogin = false;
+
+        try {
+            if (user != null && password != null) {
+                EntityTransaction transac = startTransaction();
+                transac.begin();
+                rs = entityManager.createQuery("SELECT a FROM AdherentEntity a WHERE a.nomAdherent='"+user+"' AND a.prenomAdherent='"+password+"'").getResultList();
+                if (rs.size() > 0) {
+                    canLogin = true;
+                }
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return canLogin;
+    }
 
 
 
-	/* Lister les adherents
-	 * */
-	public List<AdherentEntity> consulterListeAdherents() throws MonException {
+ //Lister les adherents
+
+/*	public List<AdherentEntity> consulterListeAdherents() throws MonException {
 		List<AdherentEntity> mesAdherents = null;
 		try
 		{
@@ -51,8 +55,9 @@ public class Service extends EntityService{
 		return mesAdherents;
 	}
 
-	/* Consultation d'une adherent par son numéro
-	*/
+// Consultation d'une adherent par son numéro
+
+
 	public AdherentEntity adherentById(int numero) throws MonException {
 		List<AdherentEntity> adherents = null;
 		AdherentEntity adherent = new AdherentEntity();
@@ -70,7 +75,7 @@ public class Service extends EntityService{
 			e.printStackTrace();
 		}
 		return adherent;
-	}
+	}*/
 
 
 

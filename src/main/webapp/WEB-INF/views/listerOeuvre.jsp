@@ -1,12 +1,12 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!--   TODO : ajouter sécurité pour la connexion -->
+<!-- TODO : ajouter sécurité pour la connexion (renvoyer à seConnecter.jsp si non connecté) -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <link rel="stylesheet" href="resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="resources/css/myCSS.css">
-    <script src="resources/js/bootstrap.min.js"></script>
-    <title>Liste oeuvre</title></head>
+    <script src="../js/bootstrap.min.js"></script>
+    <title>Liste oeuvres</title></head>
 <body>
 
 <H2 class="text-center"> Gestion des oeuvres </H2>
@@ -19,8 +19,9 @@
        <thead class="thead-light"> <TR>
             <TH scope="col">Titre</TH>
             <TH scope="col">Prix</TH>
+            <%-- TODO: uncomment for proprietaire
             <TH scope="col">Prénom propriétaire</TH>
-            <TH scope="col">Nom propriétaire</TH>
+            <TH scope="col">Nom propriétaire</TH>--%>
             <TH scope="col">Réserver/Modifier</TH>
         </TR></thead>
         <tbody>
@@ -28,13 +29,13 @@
             <tr>
                 <td scope="row">${item.titreOeuvrevente}</td>
                 <td>${item.prixOeuvrevente}</td>
+                <%-- TODO : same
                 <td>${item.proprietaire.getNomProprietaire()}</td>
-                <td>${item.proprietaire.getPrenomProprietaire()}</td>
-                <td> <!-- TODO : je ne sais pas si quand on click sur le bouton réserver, si on est redirigé sur la page "gererReservation" ou si on change juste la donnée dans la BDD (Controller + Service)
-                 TODO : faire la page modifier oeuvre + Service + Controlleur -->
+                <td>${item.proprietaire.getPrenomProprietaire()}</td>--%>
+                <td>
                     <form method="post">
-                    <button type="submit" name="reserv" value="${item.idOeuvrevente}" formaction="Controleur?action=reserverOeuvre" class="btn btn-info ${(item.etatOeuvrevente=="L")? "active":"disabled"}">Réserver</button>
-                    <button type="submit" name="modif" value="${item.idOeuvrevente}" formaction="Controleur?action=modifierOeuvre" class="btn btn-warning">Modifier</button>
+                    <button type="submit" name="reserv" value="${item.idOeuvrevente}" formaction="reserverOeuvre" class="btn btn-info ${(item.etatOeuvrevente=="L")? "active":"disabled"}">Réserver</button>
+                    <button type="submit" name="modif" value="${item.idOeuvrevente}" formaction="modifierOeuvre" class="btn btn-warning">Modifier</button>
                     </form>
                 </td>
             </tr>

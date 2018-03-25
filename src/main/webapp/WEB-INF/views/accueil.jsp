@@ -1,18 +1,11 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Nejko
-  Date: 11-Mar-18
-  Time: 10:53 AM
-  To change this template use File | Settings | File Templates.
-    TODO : ajouter sécurité pour la connexion
-
---%>
+<!-- TODO : ajouter sécurité pour la connexion (renvoyer à seConnecter.jsp si non connecté) -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <link rel="stylesheet" href="resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="resources/css/myCSS.css">
-    <script src="resources/js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
     <title>Gestion des oeuvres</title>
 </head>
 <body>

@@ -19,7 +19,7 @@ public class ServiceProprietaire extends EntityService {
         }
     }
 
-    public List<ProprietaireEntity> getListOeuvrePret(){
+    public List<ProprietaireEntity> getListProprietaire(){
         List<ProprietaireEntity> OeuvrePretList = null;
         try{
             EntityTransaction transaction = startTransaction();
@@ -32,12 +32,25 @@ public class ServiceProprietaire extends EntityService {
         return OeuvrePretList;
     }
 
-    public ProprietaireEntity getOeuvrePretById(int id){
+    public ProprietaireEntity getProprietaireById(int id){
         ProprietaireEntity proprietaire = null;
         try {
             EntityTransaction transaction = startTransaction();
             transaction.begin();
             proprietaire = (ProprietaireEntity) entityManager.createQuery("select * from ProprietaireEntity where idProprietaire = "+id).getResultList().get(0);
+            entityManager.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return proprietaire;
+    }
+
+    public ProprietaireEntity getProprietaireByName(String  nom){
+        ProprietaireEntity proprietaire = null;
+        try {
+            EntityTransaction transaction = startTransaction();
+            transaction.begin();
+            proprietaire = (ProprietaireEntity) entityManager.createQuery("select * from ProprietaireEntity where nomProprietaire = "+nom).getResultList().get(0);
             entityManager.close();
         }catch (Exception e){
             e.printStackTrace();
