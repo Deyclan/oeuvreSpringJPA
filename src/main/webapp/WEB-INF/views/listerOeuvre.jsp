@@ -3,9 +3,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/myCSS.css">
-    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="resources/css/myCSS.css">
+    <script src="resources/js/bootstrap.min.js"></script>
     <title>Liste oeuvre</title></head>
 <body>
 
