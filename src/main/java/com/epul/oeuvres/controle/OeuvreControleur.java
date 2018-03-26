@@ -52,7 +52,7 @@ public class OeuvreControleur {
             uneOeuvre.setEtatOeuvrevente("L");
             uneOeuvre.setPrixOeuvrevente(Float.parseFloat(request.getParameter("txtprix")));
             ServiceProprietaire unService = new ServiceProprietaire();
-            ProprietaireEntity myP = unService.getProprietaireByName(request.getParameter("txtpropietaire"));
+            ProprietaireEntity myP = unService.getProprietaireById(Integer.parseInt(request.getParameter("txtproprietaire")));
             uneOeuvre.setProprietaire(myP);
             ServiceOeuvreVente serviceOeuvreVente = new ServiceOeuvreVente();
             serviceOeuvreVente.insertOeuvreVente(uneOeuvre);
@@ -99,15 +99,14 @@ public class OeuvreControleur {
     public ModelAndView sauvegarderOeuvre(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String destinationPage;
         try {
-            ServiceOeuvreVente unService = new ServiceOeuvreVente();
-            OeuvreventeEntity uneOeuvre = unService.getOeuvreVenteByIdOeuvre(Integer.parseInt(request.getParameter("txtIDOeuvre")));
+            ServiceOeuvreVente servO = new ServiceOeuvreVente();
+            OeuvreventeEntity uneOeuvre = servO.getOeuvreVenteByIdOeuvre(Integer.parseInt(request.getParameter("txtIDOeuvre")));
             uneOeuvre.setTitreOeuvrevente(request.getParameter("txttitre"));
-            uneOeuvre.setEtatOeuvrevente("L");
             uneOeuvre.setPrixOeuvrevente(Float.parseFloat(request.getParameter("txtprix")));
             ServiceProprietaire servP = new ServiceProprietaire();
-            ProprietaireEntity myP = servP.getProprietaireByName(request.getParameter("txtpropietaire"));
+            ProprietaireEntity myP = servP.getProprietaireById(Integer.parseInt(request.getParameter("txtproprietaire")));
             uneOeuvre.setProprietaire(myP);
-            unService.updateOeuvre(uneOeuvre);
+            servO.updateOeuvre(uneOeuvre);
             destinationPage = "accueil";
         } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());

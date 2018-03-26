@@ -5,7 +5,7 @@
 <head>
     <link rel="stylesheet" href="resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="resources/css/myCSS.css">
-    <script src="../js/bootstrap.min.js"></script>
+    <script src="resources/js/bootstrap.min.js"></script>
     <title>Modifier oeuvre</title>
 </head>
 <body>
@@ -30,11 +30,11 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-3" for="propietaire">Propriétaire :</label>
+            <label class="control-label col-sm-3" for="proprietaire">Propriétaire :</label>
             <div class="col-sm-5">
-                <select class="form-control" name="txtpropietaire" id="propietaire">
+                <select class="form-control" name="txtproprietaire" id="proprietaire">
                     <c:forEach items="${proprietaires}" var="prop">
-                        <option ${(oeuvreAModifier.proprietaireByIdProprietaire.getIdProprietaire() == prop.idProprietaire)? "selected": ""} id="${prop.idProprietaire}">${prop.nomProprietaire}</option>
+                        <option ${(oeuvreAModifier.proprietaire.getIdProprietaire() == prop.idProprietaire)? "selected": ""} value="${prop.idProprietaire}">${prop.nomProprietaire} ${prop.prenomProprietaire}</option>
                     </c:forEach>
                 </select>
 

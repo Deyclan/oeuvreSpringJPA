@@ -25,7 +25,7 @@ public class ServiceOeuvreVente extends EntityService {
             transaction.begin();
             // TODO update method ? (like persist for insert)
             entityManager.createQuery("UPDATE OeuvreventeEntity o" +
-                    " SET o.titreOeuvrevente='"+uneOeuvre.getTitreOeuvrevente()+"', o.prixOeuvrevente='"+uneOeuvre.getPrixOeuvrevente()+"', o.proprietaire="+uneOeuvre.getProprietaire()+
+                    " SET o.titreOeuvrevente='"+uneOeuvre.getTitreOeuvrevente()+"', o.prixOeuvrevente='"+uneOeuvre.getPrixOeuvrevente()+"', o.proprietaire="+uneOeuvre.getProprietaire().getIdProprietaire()+
                     " WHERE idOeuvrevente="+uneOeuvre.getIdOeuvrevente());
             entityManager.close();
         } catch (Exception e) {

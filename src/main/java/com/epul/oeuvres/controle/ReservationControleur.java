@@ -1,5 +1,6 @@
 package com.epul.oeuvres.controle;
 
+import com.epul.oeuvres.dao.ServiceAdherent;
 import com.epul.oeuvres.dao.ServiceOeuvreVente;
 import com.epul.oeuvres.dao.ServiceProprietaire;
 import com.epul.oeuvres.dao.ServiceReservation;
@@ -20,9 +21,11 @@ public class ReservationControleur {
     public ModelAndView ajouterReservation(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String destinationPage;
         try {
-            ServiceOeuvreVente unService = new ServiceOeuvreVente();
-            OeuvreventeEntity uneO = unService.getOeuvreVenteByIdOeuvre(Integer.parseInt(request.getParameter("reserv")));
+            ServiceOeuvreVente servO = new ServiceOeuvreVente();
+            OeuvreventeEntity uneO = servO.getOeuvreVenteByIdOeuvre(Integer.parseInt(request.getParameter("reserv")));
             request.setAttribute("oeuvreAReserver", uneO);
+            ServiceAdherent servA = new ServiceAdherent();
+            request.setAttribute("adherents", servA.getListAdherent());
             destinationPage = "ajouterReservation";
         } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());
@@ -37,15 +40,14 @@ public class ReservationControleur {
         try{
             ReservationEntity uneR = new ReservationEntity();
             uneR.setIdOeuvrevente(Integer.parseInt(request.getParameter("txtIDOeuvre")));
-            // TODO set adherent selon session
-            uneR.setIdAdherent(1);
+            uneR.setIdAdherent(Integer.parseInt(request.getParameter("txtadherent")));
             uneR.setDateReservation(Date.valueOf(request.getParameter("txtdate")));
             uneR.setStatut("attente");
             ServiceReservation serR = new ServiceReservation();
             serR.insertReservation(uneR);
             ServiceOeuvreVente serO = new ServiceOeuvreVente();
             serO.changeEtatOeuvreVente(serO.getOeuvreVenteByIdOeuvre(uneR.getIdOeuvrevente()));
-            destinationPage = "listerOeuvre";
+            destinationPage = "accueil";
         } catch (Exception e){
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "Erreur";
@@ -74,7 +76,7 @@ public class ReservationControleur {
             ServiceReservation unS = new ServiceReservation();
             ReservationEntity uneR = unS.getReservationById(Integer.parseInt(request.getParameter("confirmer")));
             unS.confirmerReservation(uneR);
-            destinationPage = "listerReservation";
+            destinationPage = "accueil";
         } catch (Exception e){
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "Erreur";
@@ -86,12 +88,14 @@ public class ReservationControleur {
     public ModelAndView annulerReservation(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String destinationPage;
         try{
+            // Supprime la réservation
             ServiceReservation serR = new ServiceReservation();
             ReservationEntity uneR = serR.getReservationById(Integer.parseInt(request.getParameter("annuler")));
             serR.deleteReservation(uneR);
+            // Change l'état de l'oeuvre
             ServiceOeuvreVente serO = new ServiceOeuvreVente();
             serO.changeEtatOeuvreVente(serO.getOeuvreVenteByIdOeuvre(uneR.getIdOeuvrevente()));
-            destinationPage = "listerReservation";
+            destinationPage = "accueil";
         } catch (Exception e){
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "Erreur";

@@ -5,7 +5,7 @@
 <head>
     <link rel="stylesheet" href="resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="resources/css/myCSS.css">
-    <script src="../js/bootstrap.min.js"></script>
+    <script src="resources/js/bootstrap.min.js"></script>
     <title>Ajouter réservation</title>
 </head>
 <body>
@@ -38,7 +38,12 @@
         <div class="form-group">
             <label class="control-label col-sm-3" for="adherent">Adhérent :</label>
             <div class="col-sm-5">
-                <INPUT class="form-control" name="txtadherent" id="adherent" readonly>
+                <select class="form-control" name="txtadherent" id="adherent">
+                    <option selected disabled hidden>Nom adhérent</option>
+                    <c:forEach items="${adherents}" var="adhe">
+                        <option value="${adhe.idAdherent}">${adhe.nomAdherent} ${adhe.prenomAdherent}</option>
+                    </c:forEach>
+                </select>
             </div>
         </div>
         <button type="submit" formaction="insererReservation" name="bt" class="btn btn-default">Réserver</button>

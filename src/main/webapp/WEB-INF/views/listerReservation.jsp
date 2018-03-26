@@ -5,7 +5,7 @@
 <head>
     <link rel="stylesheet" href="resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="resources/css/myCSS.css">
-    <script src="../js/bootstrap.min.js"></script>
+    <script src="resources/js/bootstrap.min.js"></script>
     <title>Liste réservation</title></head>
 <body>
 <h2 class="text-center">Gestion des oeuvres</h2>

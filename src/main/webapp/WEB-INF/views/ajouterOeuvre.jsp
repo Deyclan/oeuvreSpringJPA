@@ -5,7 +5,7 @@
 <head>
     <link rel="stylesheet" href="resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="resources/css/myCSS.css">
-    <script src="../js/bootstrap.min.js"></script>
+    <script src="resources/js/bootstrap.min.js"></script>
     <title>Ajouter oeuvre</title>
 </head>
 <body>
@@ -29,12 +29,12 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-3" for="propietaire">Propriétaire :</label>
+            <label class="control-label col-sm-3" for="proprietaire">Propriétaire :</label>
             <div class="col-sm-5">
-                <select class="form-control" name="txtpropietaire" id="propietaire">
+                <select class="form-control" name="txtproprietaire" id="proprietaire">
                     <option selected disabled hidden>Nom propriétaire</option>
                     <c:forEach items="${proprietaires}" var="prop">
-                        <option id="${prop.idProprietaire}">${prop.nomProprietaire}</option>
+                        <option value="${prop.idProprietaire}">${prop.nomProprietaire} ${prop.prenomProprietaire}</option>
                     </c:forEach>
                 </select>
 
