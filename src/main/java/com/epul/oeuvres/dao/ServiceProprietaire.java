@@ -24,7 +24,8 @@ public class ServiceProprietaire extends EntityService {
         try{
             EntityTransaction transaction = startTransaction();
             transaction.begin();
-            OeuvrePretList = (List<ProprietaireEntity>) entityManager.createQuery("select distinct p from ProprietaireEntity p order by p.nomProprietaire").getResultList();
+            OeuvrePretList = (List<ProprietaireEntity>) entityManager.createQuery("select distinct p from ProprietaireEntity p order by p.idProprietaire").getResultList();
+            entityManager.close();
         }
         catch (Exception e){
             e.printStackTrace();
@@ -37,7 +38,7 @@ public class ServiceProprietaire extends EntityService {
         try {
             EntityTransaction transaction = startTransaction();
             transaction.begin();
-            proprietaire = (ProprietaireEntity) entityManager.createQuery("select * from ProprietaireEntity where idProprietaire = "+id).getResultList().get(0);
+            proprietaire = (ProprietaireEntity) entityManager.createQuery("select p from ProprietaireEntity p where p.idProprietaire = "+id).getResultList().get(0);
             entityManager.close();
         }catch (Exception e){
             e.printStackTrace();
@@ -50,7 +51,7 @@ public class ServiceProprietaire extends EntityService {
         try {
             EntityTransaction transaction = startTransaction();
             transaction.begin();
-            proprietaire = (ProprietaireEntity) entityManager.createQuery("select * from ProprietaireEntity where nomProprietaire = "+nom).getResultList().get(0);
+            proprietaire = (ProprietaireEntity) entityManager.createQuery("select p from ProprietaireEntity p where p.nomProprietaire = "+nom).getResultList().get(0);
             entityManager.close();
         }catch (Exception e){
             e.printStackTrace();

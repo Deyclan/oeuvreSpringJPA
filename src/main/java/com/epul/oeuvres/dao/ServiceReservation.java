@@ -25,6 +25,7 @@ public class ServiceReservation extends EntityService {
             EntityTransaction transaction = startTransaction();
             transaction.begin();
             reservationList = (List<ReservationEntity>) entityManager.createQuery("select r from ReservationEntity r order by r.dateReservation").getResultList();
+            entityManager.close();
         }
         catch (Exception e){
             e.printStackTrace();
@@ -52,7 +53,6 @@ public class ServiceReservation extends EntityService {
             // TODO update method ? (like persist for insert)
             entityManager.createQuery("UPDATE ReservationEntity" +
                     " SET statut='confirmee'"+
-                    // TODO : proprietaire : "' ,idProprietaire='" + uneOeuvre.getProprietaire().getIdProprietaire()+"'"+
                     " WHERE idOeuvrevente="+uneReservation.getIdOeuvrevente());
             entityManager.close();
         } catch (Exception e) {
@@ -65,7 +65,7 @@ public class ServiceReservation extends EntityService {
             EntityTransaction transaction = startTransaction();
             transaction.begin();
             // TODO delete method ? (like persist for insert)
-            entityManager.createQuery("DELETE FROM ReservationEntity WHERE idOeuvrevente="+ reservation.getIdOeuvrevente()+" AND idAdherent="+ reservation.getIdAdherent());
+            entityManager.createQuery("DELETE FROM ReservationEntity r WHERE r.idOeuvrevente="+ reservation.getIdOeuvrevente()+" AND r.idAdherent="+ reservation.getIdAdherent());
             entityManager.close();
         }catch (Exception e){
             e.printStackTrace();

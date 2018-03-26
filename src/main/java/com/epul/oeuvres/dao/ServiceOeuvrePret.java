@@ -25,6 +25,7 @@ public class ServiceOeuvrePret extends EntityService {
             EntityTransaction transaction = startTransaction();
             transaction.begin();
             OeuvrePretList = (List<OeuvrepretEntity>) entityManager.createQuery("select o from OeuvrepretEntity o order by o.titreOeuvrepret").getResultList();
+            entityManager.close();
         }
         catch (Exception e){
             e.printStackTrace();
@@ -37,7 +38,7 @@ public class ServiceOeuvrePret extends EntityService {
         try {
             EntityTransaction transaction = startTransaction();
             transaction.begin();
-            oeuvre = (OeuvrepretEntity) entityManager.createQuery("select * from OeuvrepretEntity where idOeuvrepret = "+id).getResultList().get(0);
+            oeuvre = (OeuvrepretEntity) entityManager.createQuery("select o from OeuvrepretEntity o where o.idOeuvrepret = "+id).getResultList().get(0);
             entityManager.close();
         }catch (Exception e){
             e.printStackTrace();

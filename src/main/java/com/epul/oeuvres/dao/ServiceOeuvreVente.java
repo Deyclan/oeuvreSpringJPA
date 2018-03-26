@@ -24,9 +24,8 @@ public class ServiceOeuvreVente extends EntityService {
             EntityTransaction transaction = startTransaction();
             transaction.begin();
             // TODO update method ? (like persist for insert)
-            entityManager.createQuery("UPDATE OeuvreventeEntity" +
-                    " SET titreOeuvrevente='"+uneOeuvre.getTitreOeuvrevente()+"', prixOeuvrevente='"+uneOeuvre.getPrixOeuvrevente()+"'"+
-                    // TODO : proprietaire : "' ,idProprietaire='" + uneOeuvre.getProprietaire().getIdProprietaire()+"'"+
+            entityManager.createQuery("UPDATE OeuvreventeEntity o" +
+                    " SET o.titreOeuvrevente='"+uneOeuvre.getTitreOeuvrevente()+"', o.prixOeuvrevente='"+uneOeuvre.getPrixOeuvrevente()+"', o.proprietaire="+uneOeuvre.getProprietaire()+
                     " WHERE idOeuvrevente="+uneOeuvre.getIdOeuvrevente());
             entityManager.close();
         } catch (Exception e) {
@@ -53,12 +52,26 @@ public class ServiceOeuvreVente extends EntityService {
         try {
             EntityTransaction transaction = startTransaction();
             transaction.begin();
-            oeuvre = (OeuvreventeEntity) entityManager.createQuery("select * from OeuvreventeEntity where idOeuvrevente = "+id).getResultList().get(0);
+            oeuvre = (OeuvreventeEntity) entityManager.createQuery("select o from OeuvreventeEntity o where o.idOeuvrevente = "+id).getResultList().get(0);
             entityManager.close();
         }catch (Exception e){
             e.printStackTrace();
         }
         return oeuvre;
+    }
+
+    public void changeEtatOeuvreVente(int idOeuvre) {
+        try {
+            EntityTransaction transaction = startTransaction();
+            transaction.begin();
+            // TODO update method ? (like persist for insert)
+            entityManager.createQuery("UPDATE OeuvreventeEntity o" +
+                    " SET o.etatOeuvrevente='R'"+
+                    " WHERE idOeuvrevente="+idOeuvre);
+            entityManager.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

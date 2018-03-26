@@ -4,9 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import java.io.Serializable;
 
-/**
- * Created by christian on 19/02/2017.
- */
+
 public class ReservationEntityPK implements Serializable {
     private int idOeuvrevente;
     private int idAdherent;

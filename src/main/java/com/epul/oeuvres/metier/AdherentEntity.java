@@ -2,9 +2,7 @@ package com.epul.oeuvres.metier;
 
 import javax.persistence.*;
 
-/**
- * Created by christian on 19/02/2017.
- */
+
 @Entity
 @Table(name = "adherent", schema = "baseoeuvre", catalog = "")
 public class AdherentEntity {

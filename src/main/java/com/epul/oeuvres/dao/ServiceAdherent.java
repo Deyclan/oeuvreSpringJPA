@@ -24,7 +24,7 @@ public class ServiceAdherent extends EntityService {
         try{
             EntityTransaction transaction = startTransaction();
             transaction.begin();
-            adherentEntityList = (List<AdherentEntity>) entityManager.createQuery("select a from AdherentEntity a order by a.nomAdherent").getResultList();
+            adherentEntityList = (List<AdherentEntity>) entityManager.createQuery("select a from AdherentEntity a order by a.idAdherent").getResultList();
             entityManager.close();
         }
         catch (Exception e){

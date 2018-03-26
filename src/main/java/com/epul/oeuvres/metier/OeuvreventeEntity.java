@@ -2,9 +2,7 @@ package com.epul.oeuvres.metier;
 
 import javax.persistence.*;
 
-/**
- * Created by christian on 19/02/2017.
- */
+
 @Entity
 @Table(name = "oeuvrevente", schema = "baseoeuvre", catalog = "")
 public class OeuvreventeEntity {
@@ -12,6 +10,7 @@ public class OeuvreventeEntity {
     private String titreOeuvrevente;
     private String etatOeuvrevente;
     private double prixOeuvrevente;
+    private int idProprietaire;
 
     @Id
     @Column(name = "id_oeuvrevente")
@@ -52,6 +51,17 @@ public class OeuvreventeEntity {
     public void setPrixOeuvrevente(double prixOeuvrevente) {
         this.prixOeuvrevente = prixOeuvrevente;
     }
+
+    @Basic
+    @Column(name = "id_proprietaire")
+    public int getProprietaire() {
+        return this.idProprietaire;
+    }
+
+    public void setProprietaire(int proprietaire) {
+        this.idProprietaire = proprietaire;
+    }
+
 
     @Override
     public boolean equals(Object o) {

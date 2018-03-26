@@ -41,8 +41,8 @@
                 <INPUT class="form-control" name="txtadherent" id="adherent" readonly>
             </div>
         </div>
-        <button type="submit" formaction="Controleur?action=ajouterReservation" name="bt" class="btn btn-default">Réserver</button>
-        <button type="submit" formaction="Controleur?action=listerOeuvre" name="bt" class="btn btn-info">Annuler</button>
+        <button type="submit" formaction="insererReservation" name="bt" class="btn btn-default">Réserver</button>
+        <button type="submit" formaction="listerOeuvre" name="bt" class="btn btn-info">Annuler</button>
     </FORM>
 </DIV>
 </body>

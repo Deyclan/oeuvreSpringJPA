@@ -51,10 +51,9 @@ public class OeuvreControleur {
             uneOeuvre.setTitreOeuvrevente(request.getParameter("txttitre"));
             uneOeuvre.setEtatOeuvrevente("L");
             uneOeuvre.setPrixOeuvrevente(Float.parseFloat(request.getParameter("txtprix")));
-            // TODO : choix Propriétaire?
-//            ServiceProprietaire unService = new ServiceProprietaire();
-//            ProprietaireEntity myP = unService.getProprietaireByName(request.getParameter("txtpropietaire"));
-//            uneOeuvre.setProprietaire(myP);
+            ServiceProprietaire unService = new ServiceProprietaire();
+            ProprietaireEntity myP = unService.getProprietaireByName(request.getParameter("txtpropietaire"));
+            uneOeuvre.setProprietaire(myP.getIdProprietaire());
             ServiceOeuvreVente serviceOeuvreVente = new ServiceOeuvreVente();
             serviceOeuvreVente.insertOeuvreVente(uneOeuvre);
             destinationPage = "accueil";
@@ -86,8 +85,8 @@ public class OeuvreControleur {
             ServiceOeuvreVente serviceOeuvreVente = new ServiceOeuvreVente();
             OeuvreventeEntity uneO = serviceOeuvreVente.getOeuvreVenteByIdOeuvre(Integer.parseInt(request.getParameter("modif")));
             request.setAttribute("oeuvreAModifier", uneO);
-            //TODO proprietaire
-            //request.setAttribute("proprietaires", unS.listeProprietaires());
+            ServiceProprietaire servP = new ServiceProprietaire();
+            request.setAttribute("proprietaires", servP.getListProprietaire());
             destinationPage = "modifierOeuvre";
         } catch (Exception e){
             request.setAttribute("MesErreurs", e.getMessage());
@@ -105,9 +104,9 @@ public class OeuvreControleur {
             uneOeuvre.setTitreOeuvrevente(request.getParameter("txttitre"));
             uneOeuvre.setEtatOeuvrevente("L");
             uneOeuvre.setPrixOeuvrevente(Float.parseFloat(request.getParameter("txtprix")));
-            // TODO : propriétaire?
-            //Proprietaire myP = unService.rechercherProprietaire(request.getParameter("txtpropietaire"));
-            //uneOeuvre.setProprietaire(myP);
+            ServiceProprietaire servP = new ServiceProprietaire();
+            ProprietaireEntity myP = servP.getProprietaireByName(request.getParameter("txtpropietaire"));
+            uneOeuvre.setProprietaire(myP.getIdProprietaire());
             unService.updateOeuvre(uneOeuvre);
             destinationPage = "accueil";
         } catch (Exception e) {

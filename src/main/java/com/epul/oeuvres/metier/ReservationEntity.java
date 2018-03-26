@@ -3,9 +3,7 @@ package com.epul.oeuvres.metier;
 import javax.persistence.*;
 import java.sql.Date;
 
-/**
- * Created by christian on 19/02/2017.
- */
+
 @Entity
 @Table(name = "reservation", schema = "baseoeuvre", catalog = "")
 @IdClass(ReservationEntityPK.class)

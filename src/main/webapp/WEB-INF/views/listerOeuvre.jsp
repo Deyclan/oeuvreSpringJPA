@@ -19,9 +19,8 @@
        <thead class="thead-light"> <TR>
             <TH scope="col">Titre</TH>
             <TH scope="col">Prix</TH>
-            <%-- TODO: uncomment for proprietaire
             <TH scope="col">Prénom propriétaire</TH>
-            <TH scope="col">Nom propriétaire</TH>--%>
+            <TH scope="col">Nom propriétaire</TH>
             <TH scope="col">Réserver/Modifier</TH>
         </TR></thead>
         <tbody>
@@ -29,12 +28,11 @@
             <tr>
                 <td scope="row">${item.titreOeuvrevente}</td>
                 <td>${item.prixOeuvrevente}</td>
-                <%-- TODO : same
                 <td>${item.proprietaire.getNomProprietaire()}</td>
-                <td>${item.proprietaire.getPrenomProprietaire()}</td>--%>
+                <td>${item.proprietaire.getPrenomProprietaire()}</td>
                 <td>
                     <form method="post">
-                    <button type="submit" name="reserv" value="${item.idOeuvrevente}" formaction="reserverOeuvre" class="btn btn-info ${(item.etatOeuvrevente=="L")? "active":"disabled"}">Réserver</button>
+                    <button type="submit" name="reserv" value="${item.idOeuvrevente}" formaction="ajouterReservation" class="btn btn-info ${(item.etatOeuvrevente=="L")? "active":"disabled"}">Réserver</button>
                     <button type="submit" name="modif" value="${item.idOeuvrevente}" formaction="modifierOeuvre" class="btn btn-warning">Modifier</button>
                     </form>
                 </td>
