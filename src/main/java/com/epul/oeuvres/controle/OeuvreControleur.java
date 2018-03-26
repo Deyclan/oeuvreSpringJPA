@@ -53,7 +53,7 @@ public class OeuvreControleur {
             uneOeuvre.setPrixOeuvrevente(Float.parseFloat(request.getParameter("txtprix")));
             ServiceProprietaire unService = new ServiceProprietaire();
             ProprietaireEntity myP = unService.getProprietaireByName(request.getParameter("txtpropietaire"));
-            uneOeuvre.setProprietaire(myP.getIdProprietaire());
+            uneOeuvre.setProprietaire(myP);
             ServiceOeuvreVente serviceOeuvreVente = new ServiceOeuvreVente();
             serviceOeuvreVente.insertOeuvreVente(uneOeuvre);
             destinationPage = "accueil";
@@ -106,7 +106,7 @@ public class OeuvreControleur {
             uneOeuvre.setPrixOeuvrevente(Float.parseFloat(request.getParameter("txtprix")));
             ServiceProprietaire servP = new ServiceProprietaire();
             ProprietaireEntity myP = servP.getProprietaireByName(request.getParameter("txtpropietaire"));
-            uneOeuvre.setProprietaire(myP.getIdProprietaire());
+            uneOeuvre.setProprietaire(myP);
             unService.updateOeuvre(uneOeuvre);
             destinationPage = "accueil";
         } catch (Exception e) {

@@ -10,7 +10,7 @@ public class OeuvreventeEntity {
     private String titreOeuvrevente;
     private String etatOeuvrevente;
     private double prixOeuvrevente;
-    private int idProprietaire;
+    private ProprietaireEntity proprietaire;
 
     @Id
     @Column(name = "id_oeuvrevente")
@@ -52,16 +52,15 @@ public class OeuvreventeEntity {
         this.prixOeuvrevente = prixOeuvrevente;
     }
 
-    @Basic
-    @Column(name = "id_proprietaire")
-    public int getProprietaire() {
-        return this.idProprietaire;
+    @ManyToOne
+    @JoinColumn(name = "id_proprietaire", referencedColumnName = "id_proprietaire", nullable = false)
+    public ProprietaireEntity getProprietaire() {
+        return proprietaire;
     }
 
-    public void setProprietaire(int proprietaire) {
-        this.idProprietaire = proprietaire;
+    public void setProprietaire(ProprietaireEntity proprietaireEntity) {
+        this.proprietaire = proprietaireEntity;
     }
-
 
     @Override
     public boolean equals(Object o) {

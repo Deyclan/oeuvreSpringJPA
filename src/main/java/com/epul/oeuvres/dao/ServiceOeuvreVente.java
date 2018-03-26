@@ -60,14 +60,15 @@ public class ServiceOeuvreVente extends EntityService {
         return oeuvre;
     }
 
-    public void changeEtatOeuvreVente(int idOeuvre) {
+    public void changeEtatOeuvreVente(OeuvreventeEntity uneOeuvre) {
         try {
+            String etat = uneOeuvre.getEtatOeuvrevente() == "L" ? "R" : "L";
             EntityTransaction transaction = startTransaction();
             transaction.begin();
             // TODO update method ? (like persist for insert)
             entityManager.createQuery("UPDATE OeuvreventeEntity o" +
-                    " SET o.etatOeuvrevente='R'"+
-                    " WHERE idOeuvrevente="+idOeuvre);
+                    " SET o.etatOeuvrevente='"+etat+"'"+
+                    " WHERE idOeuvrevente="+uneOeuvre.getIdOeuvrevente());
             entityManager.close();
         } catch (Exception e) {
             e.printStackTrace();

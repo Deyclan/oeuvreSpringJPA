@@ -33,8 +33,8 @@
             <div class="col-sm-5">
                 <select class="form-control" name="txtpropietaire" id="propietaire">
                     <option selected disabled hidden>Nom propriétaire</option>
-                    <c:forEach items="${proprietaires}" var="item">
-                        <option id="${item.idProprietaire}">${item.nomProprietaire}</option>
+                    <c:forEach items="${proprietaires}" var="prop">
+                        <option id="${prop.idProprietaire}">${prop.nomProprietaire}</option>
                     </c:forEach>
                 </select>
 

@@ -1,5 +1,6 @@
 package com.epul.oeuvres.controle;
 
+import com.epul.oeuvres.dao.ServiceOeuvreVente;
 import com.epul.oeuvres.dao.ServiceProprietaire;
 import com.epul.oeuvres.dao.ServiceReservation;
 import com.epul.oeuvres.metier.OeuvreventeEntity;
@@ -19,8 +20,9 @@ public class ReservationControleur {
     public ModelAndView ajouterReservation(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String destinationPage;
         try {
-            ServiceProprietaire unService = new ServiceProprietaire();
-            request.setAttribute("proprietaires", unService.getListProprietaire());
+            ServiceOeuvreVente unService = new ServiceOeuvreVente();
+            OeuvreventeEntity uneO = unService.getOeuvreVenteByIdOeuvre(Integer.parseInt(request.getParameter("reserv")));
+            request.setAttribute("oeuvreAReserver", uneO);
             destinationPage = "ajouterReservation";
         } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());
@@ -39,8 +41,10 @@ public class ReservationControleur {
             uneR.setIdAdherent(1);
             uneR.setDateReservation(Date.valueOf(request.getParameter("txtdate")));
             uneR.setStatut("attente");
-            ServiceReservation unS = new ServiceReservation();
-            unS.insertReservation(uneR);
+            ServiceReservation serR = new ServiceReservation();
+            serR.insertReservation(uneR);
+            ServiceOeuvreVente serO = new ServiceOeuvreVente();
+            serO.changeEtatOeuvreVente(serO.getOeuvreVenteByIdOeuvre(uneR.getIdOeuvrevente()));
             destinationPage = "listerOeuvre";
         } catch (Exception e){
             request.setAttribute("MesErreurs", e.getMessage());
@@ -53,8 +57,8 @@ public class ReservationControleur {
     public ModelAndView gererReservation(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String destinationPage;
         try {
-            ServiceReservation unService = new ServiceReservation();
-            request.setAttribute("mesReservations", unService.getListReservation());
+            ServiceReservation serR = new ServiceReservation();
+            request.setAttribute("mesReservations", serR.getListReservation());
             destinationPage = "listerReservation";
         } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());
@@ -82,9 +86,11 @@ public class ReservationControleur {
     public ModelAndView annulerReservation(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String destinationPage;
         try{
-            ServiceReservation unS = new ServiceReservation();
-            ReservationEntity uneR = unS.getReservationById(Integer.parseInt(request.getParameter("annuler")));
-            unS.deleteReservation(uneR);
+            ServiceReservation serR = new ServiceReservation();
+            ReservationEntity uneR = serR.getReservationById(Integer.parseInt(request.getParameter("annuler")));
+            serR.deleteReservation(uneR);
+            ServiceOeuvreVente serO = new ServiceOeuvreVente();
+            serO.changeEtatOeuvreVente(serO.getOeuvreVenteByIdOeuvre(uneR.getIdOeuvrevente()));
             destinationPage = "listerReservation";
         } catch (Exception e){
             request.setAttribute("MesErreurs", e.getMessage());

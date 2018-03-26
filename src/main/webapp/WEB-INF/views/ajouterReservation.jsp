@@ -16,23 +16,23 @@
 <H3 class="text-center"> Ajouter une réservation </H3>
 <DIV>
     <FORM class="form-horizontal" name='identification' method="post">
-        <INPUT  type="hidden" class="form-control" name="txtIDOeuvre" id="id" value="${oeuvreAModifier.idOeuvrevente}">
+        <INPUT  type="hidden" class="form-control" name="txtIDOeuvre" id="id" value="${oeuvreAReserver.idOeuvrevente}">
         <div class="form-group">
             <label class="control-label col-sm-3" for="titre"> Titre de l'oeuvre : </label>
             <div class="col-sm-5">
-                <INPUT type="text" class="form-control" name="txttitre" id="titre" value="${oeuvreAModifier.titreOeuvrevente}" readonly>
+                <INPUT type="text" class="form-control" name="txttitre" id="titre" value="${oeuvreAReserver.titreOeuvrevente}" readonly>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-3" for="prix">Prix : </label>
             <div class="col-sm-5">
-                <INPUT type="number" step="0.01" min="0" class="form-control" name="txtprix" id="prix" value="${oeuvreAModifier.prixOeuvrevente}" readonly>
+                <INPUT type="number" step="0.01" min="0" class="form-control" name="txtprix" id="prix" value="${oeuvreAReserver.prixOeuvrevente}" readonly>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-3" for="date">Date réservation : </label>
             <div class="col-sm-5">
-                <INPUT type="date" class="form-control" name="txtdate" id="date" value="${oeuvreAModifier.prixOeuvrevente}" required>
+                <INPUT type="date" class="form-control" name="txtdate" id="date">
             </div>
         </div>
         <div class="form-group">
