@@ -38,8 +38,7 @@ public class ServiceAdherent extends EntityService {
         try {
             EntityTransaction transaction = startTransaction();
             transaction.begin();
-
-            adherent = (AdherentEntity) entityManager.createQuery("select a from AdherentEntity a where a.idAdherent ="+id).getResultList().get(0);
+            adherent = entityManager.find(AdherentEntity.class, id);
             entityManager.close();
         }catch (Exception e){
             e.printStackTrace();

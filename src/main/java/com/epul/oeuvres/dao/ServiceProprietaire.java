@@ -38,7 +38,7 @@ public class ServiceProprietaire extends EntityService {
         try {
             EntityTransaction transaction = startTransaction();
             transaction.begin();
-            proprietaire = (ProprietaireEntity) entityManager.createQuery("select p from ProprietaireEntity p where p.idProprietaire = "+id).getResultList().get(0);
+            proprietaire = entityManager.find(ProprietaireEntity.class, id);
             entityManager.close();
         }catch (Exception e){
             e.printStackTrace();

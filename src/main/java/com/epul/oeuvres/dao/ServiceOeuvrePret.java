@@ -1,6 +1,7 @@
 package com.epul.oeuvres.dao;
 
 import com.epul.oeuvres.metier.OeuvrepretEntity;
+import com.epul.oeuvres.metier.OeuvreventeEntity;
 
 import javax.persistence.EntityTransaction;
 import java.util.List;
@@ -38,7 +39,7 @@ public class ServiceOeuvrePret extends EntityService {
         try {
             EntityTransaction transaction = startTransaction();
             transaction.begin();
-            oeuvre = (OeuvrepretEntity) entityManager.createQuery("select o from OeuvrepretEntity o where o.idOeuvrepret = "+id).getResultList().get(0);
+            oeuvre = entityManager.find(OeuvrepretEntity.class, id);
             entityManager.close();
         }catch (Exception e){
             e.printStackTrace();

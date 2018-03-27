@@ -16,7 +16,7 @@
 
 
 <body>
-<P><A href="/">Retour accueil</A></P>
+<P><A href="/index">Retour accueil</A></P>
 <H2 class="text-center"> Ajout d'un adhérent </H2>
 <br/>
     <FORM name='identification' method="post" action="insererAdherent" onsubmit="return teste()">

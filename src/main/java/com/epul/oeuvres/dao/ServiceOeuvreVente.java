@@ -23,10 +23,7 @@ public class ServiceOeuvreVente extends EntityService {
         try {
             EntityTransaction transaction = startTransaction();
             transaction.begin();
-            // TODO update method ? (like persist for insert)
-            entityManager.createQuery("UPDATE OeuvreventeEntity o" +
-                    " SET o.titreOeuvrevente='"+uneOeuvre.getTitreOeuvrevente()+"', o.prixOeuvrevente='"+uneOeuvre.getPrixOeuvrevente()+"', o.proprietaire="+uneOeuvre.getProprietaire().getIdProprietaire()+
-                    " WHERE idOeuvrevente="+uneOeuvre.getIdOeuvrevente());
+            entityManager.merge(uneOeuvre);
             entityManager.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -52,7 +49,7 @@ public class ServiceOeuvreVente extends EntityService {
         try {
             EntityTransaction transaction = startTransaction();
             transaction.begin();
-            oeuvre = (OeuvreventeEntity) entityManager.createQuery("select o from OeuvreventeEntity o where o.idOeuvrevente = "+id).getResultList().get(0);
+            oeuvre = entityManager.find(OeuvreventeEntity.class, id);
             entityManager.close();
         }catch (Exception e){
             e.printStackTrace();
@@ -66,9 +63,7 @@ public class ServiceOeuvreVente extends EntityService {
             EntityTransaction transaction = startTransaction();
             transaction.begin();
             // TODO update method ? (like persist for insert)
-            entityManager.createQuery("UPDATE OeuvreventeEntity o" +
-                    " SET o.etatOeuvrevente='"+etat+"'"+
-                    " WHERE idOeuvrevente="+uneOeuvre.getIdOeuvrevente());
+            entityManager.merge(uneOeuvre);
             entityManager.close();
         } catch (Exception e) {
             e.printStackTrace();
