@@ -51,7 +51,8 @@ public class ReservationControleur {
             serR.insertReservation(uneR);
             ServiceOeuvreVente serO = new ServiceOeuvreVente();
             serO.changeEtatOeuvreVente(serO.getOeuvreVenteByIdOeuvre(uneR.getIdOeuvrevente()));
-            destinationPage = "accueil";
+            request.setAttribute("mesReservations", serR.getListReservation());
+            destinationPage = "listerReservation";
         } catch (Exception e){
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "Erreur";
@@ -82,7 +83,8 @@ public class ReservationControleur {
             ServiceReservation unS = new ServiceReservation();
             ReservationEntity uneR = unS.getReservationById(Integer.parseInt(request.getParameter("confirmer")));
             unS.confirmerReservation(uneR);
-            destinationPage = "accueil";
+            request.setAttribute("mesReservations", unS.getListReservation());
+            destinationPage = "listerReservation";
         } catch (Exception e){
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "Erreur";
@@ -101,8 +103,8 @@ public class ReservationControleur {
             serO.changeEtatOeuvreVente(serO.getOeuvreVenteByIdOeuvre(uneR.getIdOeuvrevente()));
             // Supprime la réservation
             serR.deleteReservation(uneR);
-
-            destinationPage = "accueil";
+            request.setAttribute("mesReservations", serR.getListReservation());
+            destinationPage = "listerReservation";
         } catch (Exception e){
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "Erreur";
