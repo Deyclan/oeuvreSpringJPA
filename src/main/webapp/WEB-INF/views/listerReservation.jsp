@@ -37,12 +37,12 @@
                                     <td class="col">
                                         <form method="post">
                                             <button type="submit" name="confirmer"
-                                                    value="${reserv.oeuvreventeByIdOeuvrevente.getIdOeuvrevente()}"
+                                                    value="${reserv.idOeuvrevente}"
                                                     formaction="confirmerReservation"
                                                     class="btn purple-gradient btn-sm ${(reserv.statut=="attente")? "active":"disabled"}">Confirmer
                                             </button>
                                             <button type="submit" name="annuler"
-                                                    value="${reserv.oeuvreventeByIdOeuvrevente.getIdOeuvrevente()}"
+                                                    value="${reserv.idOeuvrevente}"
                                                     formaction="annulerReservation" class="btn peach-gradient btn-sm">Annuler réservation
                                             </button>
                                         </form>

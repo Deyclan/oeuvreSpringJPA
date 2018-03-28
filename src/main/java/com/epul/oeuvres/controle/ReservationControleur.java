@@ -94,13 +94,14 @@ public class ReservationControleur {
     public ModelAndView annulerReservation(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String destinationPage;
         try{
-            // Supprime la réservation
+            // Change l'état de l'oeuvre
             ServiceReservation serR = new ServiceReservation();
             ReservationEntity uneR = serR.getReservationById(Integer.parseInt(request.getParameter("annuler")));
-            serR.deleteReservation(uneR);
-            // Change l'état de l'oeuvre
             ServiceOeuvreVente serO = new ServiceOeuvreVente();
             serO.changeEtatOeuvreVente(serO.getOeuvreVenteByIdOeuvre(uneR.getIdOeuvrevente()));
+            // Supprime la réservation
+            serR.deleteReservation(uneR);
+
             destinationPage = "accueil";
         } catch (Exception e){
             request.setAttribute("MesErreurs", e.getMessage());

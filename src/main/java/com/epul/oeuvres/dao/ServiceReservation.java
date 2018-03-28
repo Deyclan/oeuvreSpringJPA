@@ -35,10 +35,14 @@ public class ServiceReservation extends EntityService {
 
     public ReservationEntity getReservationById(int id){
         ReservationEntity reservation = null;
+        List<ReservationEntity> reservationEntityList;
         try {
             EntityTransaction transaction = startTransaction();
             transaction.begin();
-            reservation = entityManager.find(ReservationEntity.class, id);
+            reservationEntityList = entityManager.createQuery("select r from ReservationEntity r where idOeuvrevente ="+id).getResultList();
+            if (reservationEntityList.size()>0){
+                reservation = reservationEntityList.get(0);
+            }
             entityManager.close();
         }catch (Exception e){
             e.printStackTrace();
@@ -48,6 +52,7 @@ public class ServiceReservation extends EntityService {
 
     public void confirmerReservation(ReservationEntity uneReservation) {
         try {
+            uneReservation.setStatut("reserve");
             EntityTransaction transaction = startTransaction();
             transaction.begin();
             entityManager.merge(uneReservation);
@@ -62,7 +67,7 @@ public class ServiceReservation extends EntityService {
         try {
             EntityTransaction transaction = startTransaction();
             transaction.begin();
-            entityManager.remove(reservation);
+            entityManager.remove(entityManager.contains(reservation) ? reservation : entityManager.merge(reservation));
             transaction.commit();
             entityManager.close();
         }catch (Exception e){
