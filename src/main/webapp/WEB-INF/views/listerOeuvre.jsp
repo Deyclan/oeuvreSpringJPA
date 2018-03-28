@@ -19,15 +19,15 @@
         <div class="container">
             <div class="row mt-5 justify-content-center">
                 <div class="col-md-12 my-3">
-                    <div style="height:75%">
+                    <div style="height:700px">
                     <!--Table-->
-                    <table border="0" class="table table-hover text-center card" style="background-color:rgba(0, 0, 0, 0.3); max-height: 100% ; overflow-y: auto">
+                    <table border="0" class="table table-hover text-center card" style="background-color:rgba(0, 0, 0, 0.3); max-height: 100% ; overflow-y: auto ; overflow-x: hidden">
                         <thead class="thead-light">
                         <tr class="row justify-content-center">
                             <th class="col" scope="col">Titre</th>
                             <th class="col" scope="col">Prix</th>
                             <th class="col" scope="col">Propriétaire</th>
-                            <th class="col" scope="col">Réserver/Modifier</th>
+                            <th class="col" scope="col">Gérer oeuvre</th>
                         </tr>
                         </thead>
                         <tbody class="white-text">
@@ -43,7 +43,6 @@
                                         <button type="submit" name="modif" value="${oeuvre.idOeuvrevente}" formaction="modifierOeuvre"
                                                 class="btn aqua-gradient btn-sm">Modifier</button>
                                         <button type="submit" name="suppr" value="${oeuvre.idOeuvrevente}" formaction="supprimerOeuvre"
-                                                onclick="confirm('Vous êtes sûr de vouloir supprimer cette oeuvre?')"
                                                 class="btn peach-gradient btn-sm">Supprimer</button>
                                     </form>
                                 </td>

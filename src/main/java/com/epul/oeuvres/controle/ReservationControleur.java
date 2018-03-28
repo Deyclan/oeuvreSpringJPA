@@ -2,7 +2,6 @@ package com.epul.oeuvres.controle;
 
 import com.epul.oeuvres.dao.ServiceAdherent;
 import com.epul.oeuvres.dao.ServiceOeuvreVente;
-import com.epul.oeuvres.dao.ServiceProprietaire;
 import com.epul.oeuvres.dao.ServiceReservation;
 import com.epul.oeuvres.metier.OeuvreventeEntity;
 import com.epul.oeuvres.metier.ReservationEntity;
@@ -17,7 +16,7 @@ import java.sql.Date;
 @Controller
 public class ReservationControleur {
 
-    @RequestMapping( value = "ajouterReservation")
+    @RequestMapping(value = "ajouterReservation")
     public ModelAndView ajouterReservation(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String destinationPage;
         try {
@@ -34,10 +33,10 @@ public class ReservationControleur {
         return new ModelAndView(destinationPage);
     }
 
-    @RequestMapping( value = "insererReservation")
+    @RequestMapping(value = "insererReservation")
     public ModelAndView insererReservation(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String destinationPage;
-        try{
+        try {
             ReservationEntity uneR = new ReservationEntity();
             uneR.setIdOeuvrevente(Integer.parseInt(request.getParameter("txtIDOeuvre")));
             uneR.setIdAdherent(Integer.parseInt(request.getParameter("txtadherent")));
@@ -45,17 +44,20 @@ public class ReservationControleur {
             uneR.setStatut("attente");
             ServiceReservation serR = new ServiceReservation();
             serR.insertReservation(uneR);
+            // Change l'état de l'oeuvre
             ServiceOeuvreVente serO = new ServiceOeuvreVente();
-            serO.changeEtatOeuvreVente(serO.getOeuvreVenteByIdOeuvre(uneR.getIdOeuvrevente()));
+            OeuvreventeEntity uneO = serO.getOeuvreVenteByIdOeuvre(uneR.getIdOeuvrevente());
+            uneO.setEtatOeuvrevente("R");
+            serO.updateOeuvre(uneO);
             destinationPage = "accueil";
-        } catch (Exception e){
+        } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "Erreur";
         }
         return new ModelAndView(destinationPage);
     }
 
-    @RequestMapping( value = "gererReservations")
+    @RequestMapping(value = "gererReservations")
     public ModelAndView gererReservation(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String destinationPage;
         try {
@@ -69,34 +71,38 @@ public class ReservationControleur {
         return new ModelAndView(destinationPage);
     }
 
-    @RequestMapping( value = "confirmerReservation")
+    @RequestMapping(value = "confirmerReservation")
     public ModelAndView confirmerReservation(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String destinationPage;
-        try{
+        try {
+            // Changer statut réservation à confirmee
             ServiceReservation unS = new ServiceReservation();
             ReservationEntity uneR = unS.getReservationById(Integer.parseInt(request.getParameter("confirmer")));
-            unS.confirmerReservation(uneR);
+            uneR.setStatut("confirmee");
+            unS.updateReservation(uneR);
             destinationPage = "accueil";
-        } catch (Exception e){
+        } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "Erreur";
         }
         return new ModelAndView(destinationPage);
     }
 
-    @RequestMapping( value = "annulerReservation")
+    @RequestMapping(value = "annulerReservation")
     public ModelAndView annulerReservation(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String destinationPage;
-        try{
+        try {
             // Supprime la réservation
             ServiceReservation serR = new ServiceReservation();
             ReservationEntity uneR = serR.getReservationById(Integer.parseInt(request.getParameter("annuler")));
             serR.deleteReservation(uneR);
             // Change l'état de l'oeuvre
             ServiceOeuvreVente serO = new ServiceOeuvreVente();
-            serO.changeEtatOeuvreVente(serO.getOeuvreVenteByIdOeuvre(uneR.getIdOeuvrevente()));
+            OeuvreventeEntity uneO = serO.getOeuvreVenteByIdOeuvre(uneR.getIdOeuvrevente());
+            uneO.setEtatOeuvrevente("L");
+            serO.updateOeuvre(uneO);
             destinationPage = "accueil";
-        } catch (Exception e){
+        } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "Erreur";
         }

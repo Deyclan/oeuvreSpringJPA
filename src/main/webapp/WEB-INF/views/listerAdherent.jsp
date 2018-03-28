@@ -21,15 +21,17 @@
             <div class="container">
                 <div class="row mt-5 justify-content-center">
                     <div class="col-md-12 my-3">
-                        <div style="height:75%">
+                        <div style="height:700px">
                         <!--Table-->
-                        <TABLE BORDER="0" class="table table-responsive table-hover text-center card" style="background-color:rgba(0, 0, 0, 0.3); max-height: 100% ; overflow-y: auto">
+                        <TABLE BORDER="0" class="table table-hover text-center card" style="background-color:rgba(0, 0, 0, 0.3); max-height: 100% ; overflow-y: auto; overflow-x: hidden">
                         <thead class="thead-light">
                         <TR class="row justify-content-center">
-                            <TH class="col" scope="col">Numero</TH>
+                            <TH class="col" scope="col">Numéro</TH>
                             <TH class="col" scope="col">Nom</TH>
                             <TH class="col" scope="col">Prénom</TH>
                             <TH class="col" scope="col">Ville</TH>
+                            <th class="col" scope="col">Gérer adhérent</th>
+
                         </TR>
                         </thead>
                         <tbody class="white-text">

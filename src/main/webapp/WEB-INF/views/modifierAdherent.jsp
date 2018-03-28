@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<!-- TODO : Ajouter la possibilité de modifier l'adhérent avec bouton annuler (page jsp? + Controleur + ServiceConnexion) -->
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -48,6 +46,7 @@
                                 </div>
                                 <div class="text-center mt-4">
                                     <button type="submit" name="bt" class="btn btn-default">Modifier</button>
+                                    <button type="reset" name="bt" class="btn btn-default">RAZ</button>
                                     <hr class="hr-light mb-3 mt-4">
                                 </div>
                             </div>

@@ -117,8 +117,7 @@ public class OeuvreControleur {
         String destinationPage;
         try {
             ServiceOeuvreVente serviceOeuvreVente = new ServiceOeuvreVente();
-            int idOeuvre = Integer.parseInt(request.getParameter("suppr"));
-            OeuvreventeEntity uneOeuvre = serviceOeuvreVente.getOeuvreVenteByIdOeuvre(idOeuvre);
+            OeuvreventeEntity uneOeuvre = serviceOeuvreVente.getOeuvreVenteByIdOeuvre(Integer.parseInt(request.getParameter("suppr")));
             serviceOeuvreVente.deleteOeuvre(uneOeuvre);
             destinationPage = "accueil";
         } catch (Exception e) {
