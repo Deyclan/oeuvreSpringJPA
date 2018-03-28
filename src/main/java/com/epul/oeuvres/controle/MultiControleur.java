@@ -4,34 +4,16 @@ package com.epul.oeuvres.controle;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.epul.oeuvres.dao.ServiceAdherent;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 //import com.epul.metier.*;
 //import com.epul.meserreurs.*;
 
 
 
 import com.epul.oeuvres.dao.*;
-import com.epul.oeuvres.meserreurs.*;
-import com.epul.oeuvres.metier.*;
-
-
-
-
-
-
-
-import org.springframework.ui.Model;
-
-
-
-import java.util.*;
 
 ///
 /// Les m�thode du contr�leur r�pondent � des sollicitations
@@ -75,8 +57,8 @@ public class MultiControleur {
         String destinationPage;
         try {
             // TODO : session start?
-            Service unService = new Service();
-            canConnect = unService.seConnecter(request.getParameter("username"), request.getParameter("password"));
+            ServiceConnexion unServiceConnexion = new ServiceConnexion();
+            canConnect = unServiceConnexion.seConnecter(request.getParameter("username"), request.getParameter("password"));
             destinationPage = canConnect ? "accueil" : "seConnecter";
         } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());

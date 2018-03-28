@@ -21,14 +21,14 @@
                 <div class="col-md-12 my-3">
                     <div style="height:75%">
                     <!--Table-->
-                    <TABLE BORDER="0" class="table table-hover text-center card" style="background-color:rgba(0, 0, 0, 0.3); max-height: 100% ; overflow-y: auto">
+                    <table border="0" class="table table-hover text-center card" style="background-color:rgba(0, 0, 0, 0.3); max-height: 100% ; overflow-y: auto">
                         <thead class="thead-light">
-                        <TR class="row justify-content-center">
-                            <TH class="col" scope="col">Titre</TH>
-                            <TH class="col" scope="col">Prix</TH>
-                            <TH class="col" scope="col">Propriétaire</TH>
-                            <TH class="col" scope="col">Réserver/Modifier</TH>
-                        </TR>
+                        <tr class="row justify-content-center">
+                            <th class="col" scope="col">Titre</th>
+                            <th class="col" scope="col">Prix</th>
+                            <th class="col" scope="col">Propriétaire</th>
+                            <th class="col" scope="col">Réserver/Modifier</th>
+                        </tr>
                         </thead>
                         <tbody class="white-text">
                         <c:forEach items="${mesOeuvres}" var="oeuvre">
@@ -47,7 +47,7 @@
                             </tr>
                         </c:forEach>
                         </tbody>
-                    </TABLE></div>
+                    </table></div>
                 </div>
             </div>
         </div>

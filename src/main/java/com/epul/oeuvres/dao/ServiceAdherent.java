@@ -1,7 +1,9 @@
 package com.epul.oeuvres.dao;
 
 import com.epul.oeuvres.metier.AdherentEntity;
+import com.epul.oeuvres.metier.OeuvreventeEntity;
 
+import javax.persistence.Entity;
 import javax.persistence.EntityTransaction;
 import java.util.List;
 
@@ -44,6 +46,30 @@ public class ServiceAdherent extends EntityService {
             e.printStackTrace();
         }
         return adherent;
+    }
+
+    public void updateAdherent(AdherentEntity adherent) {
+        try {
+            EntityTransaction transaction = startTransaction();
+            transaction.begin();
+            entityManager.merge(adherent);
+            transaction.commit();
+            entityManager.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteAdherent(AdherentEntity adherent){
+        try{
+            EntityTransaction transaction = startTransaction();
+            transaction.begin();
+            entityManager.remove(entityManager.contains(adherent) ? adherent : entityManager.merge(adherent));
+            transaction.commit();
+            entityManager.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 }

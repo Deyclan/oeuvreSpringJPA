@@ -1,6 +1,6 @@
 package com.epul.oeuvres.controle;
 
-//import com.epul.oeuvres.dao.Service;
+//import com.epul.oeuvres.dao.ServiceConnexion;
 import com.epul.oeuvres.dao.ServiceAdherent;
 import com.epul.oeuvres.metier.AdherentEntity;
 import org.springframework.stereotype.Controller;
@@ -58,5 +58,54 @@ public class AdherentControleur {
         return new ModelAndView(destinationPage);
     }
 
+    @RequestMapping(value = "modifierAdherent")
+    public ModelAndView modifyAdherent(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String destinationPage;
+        try {
+            ServiceAdherent serviceAdherent = new ServiceAdherent();
+            AdherentEntity adherent = serviceAdherent.getAdherentById(Integer.parseInt(request.getParameter("modifier")));
+            request.setAttribute("adherentAModifier", adherent);
+            destinationPage = "modifierAdherent";
+        } catch (Exception e) {
+            request.setAttribute("MesErreurs", e.getMessage());
+            destinationPage = "Erreur";
+        }
+        return new ModelAndView(destinationPage);
+    }
+
+
+    @RequestMapping(value = "sauvegarderAdherent")
+    public ModelAndView sauvegarderAdherent(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String destinationPage;
+        try {
+            ServiceAdherent serviceAdherent = new ServiceAdherent();
+            AdherentEntity adherent = serviceAdherent.getAdherentById(Integer.parseInt(request.getParameter("txtid")));
+            adherent.setNomAdherent(request.getParameter("txtnom"));
+            adherent.setPrenomAdherent(request.getParameter("txtprenom"));
+            adherent.setVilleAdherent(request.getParameter("txtville"));
+            serviceAdherent.updateAdherent(adherent);
+            destinationPage = "index";
+        } catch (Exception e) {
+            request.setAttribute("MesErreurs", e.getMessage());
+            destinationPage = "Erreur";
+        }
+        return new ModelAndView(destinationPage);
+    }
+
+    @RequestMapping(value = "supprimerAdherent")
+    public ModelAndView supprimerAdherent(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String destinationPage;
+        try{
+            ServiceAdherent serviceAdherent = new ServiceAdherent();
+            AdherentEntity adherent = serviceAdherent.getAdherentById(Integer.parseInt(request.getParameter("supprimer")));
+            serviceAdherent.deleteAdherent(adherent);
+            destinationPage = "index";
+        }
+        catch (Exception e){
+            request.setAttribute("MesErreurs", e.getMessage());
+            destinationPage = "Erreur";
+        }
+        return new ModelAndView(destinationPage);
+    }
 
 }

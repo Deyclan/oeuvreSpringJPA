@@ -1,9 +1,8 @@
 package com.epul.oeuvres.dao;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import com.epul.oeuvres.metier.AdherentEntity;
+
+import javax.persistence.*;
 
 /**
  * Created by Valentin on 06/04/2016.
@@ -20,5 +19,4 @@ public abstract class EntityService {
 
         return entityManager.getTransaction();
     }
-
 }

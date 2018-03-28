@@ -39,6 +39,14 @@
                                 <td class="col">${adhe.nomAdherent}</td>
                                 <td class="col">${adhe.prenomAdherent}</td>
                                 <td class="col">${adhe.villeAdherent}</td>
+                                <td class="col">
+                                    <form method="post">
+                                        <button type="submit" name="modifier" value="${adhe.idAdherent}" formaction="modifierAdherent"
+                                                class="btn purple-gradient btn-sm" >Modifier</button>
+                                        <button type="submit" name="supprimer" value="${adhe.idAdherent}" formaction="supprimerAdherent"
+                                                class="btn peach-gradient btn-sm">Supprimer</button>
+                                    </form>
+                                </td>
                             </tr>
                         </c:forEach>
                         </tbody>

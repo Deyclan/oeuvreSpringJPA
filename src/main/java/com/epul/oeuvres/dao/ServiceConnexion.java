@@ -7,7 +7,7 @@ import com.epul.oeuvres.metier.*;
 
 import javax.persistence.EntityTransaction;
 
-public class Service extends EntityService{
+public class ServiceConnexion extends EntityService{
 
 /* Connexion selon user et password*/
 
