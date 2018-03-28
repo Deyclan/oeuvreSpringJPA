@@ -1,38 +1,54 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<link rel="stylesheet" href="resources/css/bootstrap.min.css">
-	<link rel="stylesheet" href="resources/css/myCSS.css">
-	<script src="resources/js/bootstrap.min.js"></script>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Affichage de tous les adhérents</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="resources/css/mdb.min.css">
+    <link rel="stylesheet" href="resources/css/myCSS.css">
+    <title>Affichage de tous les adhérents</title>
 </head>
 <body>
-	<P><A href="/index">Retour accueil</A></P>
-	<h2 class="text-center"> Listing des Adhérents </h2>
-
-	<TABLE BORDER="1" class="table table-responsive table-hover borderless">
-		<thead class="thead-light"><TR>
-			<TH scope="col">Numero</TH>
-			<TH scope="col">Nom</TH>
-			<TH scope="col">Prénom</TH>
-			<TH scope="col">Ville</TH>
-
-		</TR></thead>
-		<tbody>
-		<c:forEach items="${mesAdherents}" var="item">
-			<tr>
-				<td scope="row">${item.idAdherent}</td>
-				<td>${item.nomAdherent}</td>
-				<td>${item.prenomAdherent}</td>
-                <td>${item.villeAdherent}</td>
-			</tr>
-		</c:forEach>
-		</tbody>
-	</TABLE>
+<header>
+    <jsp:include page="menuIndex.jsp"/>
+    <div class="view" style="background-image: url('resources/image/heart.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+        <div class="mask rgba-gradient d-flex justify-content-center align-items-center">
+            <div class="container">
+                <div class="row mt-5 justify-content-center">
+                    <div class="col-md-12 my-3">
+                        <div style="height:75%">
+                        <!--Table-->
+                        <TABLE BORDER="0" class="table table-responsive table-hover text-center card" style="background-color:rgba(0, 0, 0, 0.3); max-height: 100% ; overflow-y: auto">
+                        <thead class="thead-light">
+                        <TR class="row justify-content-center">
+                            <TH class="col" scope="col">Numero</TH>
+                            <TH class="col" scope="col">Nom</TH>
+                            <TH class="col" scope="col">Prénom</TH>
+                            <TH class="col" scope="col">Ville</TH>
+                        </TR>
+                        </thead>
+                        <tbody class="white-text">
+                        <c:forEach items="${mesAdherents}" var="adhe">
+                            <tr class="row justify-content-center">
+                                <td class="col" scope="row">${adhe.idAdherent}</td>
+                                <td class="col">${adhe.nomAdherent}</td>
+                                <td class="col">${adhe.prenomAdherent}</td>
+                                <td class="col">${adhe.villeAdherent}</td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                        </TABLE></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<jsp:include page="footer.jsp"/>
 </body>
 </html>

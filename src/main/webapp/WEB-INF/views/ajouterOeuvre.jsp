@@ -1,48 +1,64 @@
-<!-- TODO : ajouter sécurité pour la connexion (renvoyer à seConnecter.jsp si non connecté) -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <link rel="stylesheet" href="resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="resources/css/mdb.min.css">
     <link rel="stylesheet" href="resources/css/myCSS.css">
-    <script src="resources/js/bootstrap.min.js"></script>
     <title>Ajouter oeuvre</title>
 </head>
-<body>
-<h2 class="text-center">Gestion des oeuvres</h2>
-<br/>
-<jsp:include page="menu.jsp"/>
-<br/>
-<H3 class="text-center"> Ajout d'une oeuvre </H3>
-<DIV>
-    <FORM class="form-horizontal" name='identification' method="post" action="insererOeuvre">
-        <div class="form-group">
-            <label class="control-label col-sm-3" for="titre"> Titre de l'oeuvre : </label>
-            <div class="col-sm-5">
-                <INPUT type="text" class="form-control" name="txttitre" id="titre">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-3" for="prix">Prix : </label>
-            <div class="col-sm-5">
-                <INPUT type="number" step="0.01" min="0" class="form-control" name="txtprix" id="prix">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-3" for="proprietaire">Propriétaire :</label>
-            <div class="col-sm-5">
-                <select class="form-control" name="txtproprietaire" id="proprietaire">
-                    <option selected disabled hidden>Nom propriétaire</option>
-                    <c:forEach items="${proprietaires}" var="prop">
-                        <option value="${prop.idProprietaire}">${prop.nomProprietaire} ${prop.prenomProprietaire}</option>
-                    </c:forEach>
-                </select>
 
+<body>
+<header>
+    <jsp:include page="menuOeuvre.jsp"/>
+    <div class="view" style="background-image: url('resources/image/book.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+        <div class="mask rgba-gradient d-flex justify-content-center align-items-center">
+            <div class="container">
+                <div class="row mt-5 justify-content-center">
+                    <div class="col-md-6 col-xl-5 mb-4">
+                        <!--Form-->
+                        <form class="card wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeInUp; animation-delay: 0.3s; background-color:rgba(0, 0, 0, 0.2);"
+                              name='identification' method="post" action="insererOeuvre">
+                            <div class="card-body">
+                                <!--Header-->
+                                <div class="text-center">
+                                    <h3 class="white-text">Ajouter une oeuvre</h3>
+                                    <hr class="hr-light">
+                                </div>
+                                <!--Body-->
+                                <div class="md-form">
+                                    <label for="titre" class="active white-text"> Titre de l'oeuvre </label>
+                                    <INPUT type="text" class="form-control amber-text" name="txttitre" id="titre">
+                                </div>
+                                <div class="md-form">
+                                    <label for="prix" class="active white-text"> Prix </label>
+                                    <INPUT type="number" step="0.01" min="0" class="form-control amber-text" name="txtprix" id="prix">
+                                </div>
+                                <div>
+                                    <br/>
+                                    <select class="form-control browser-default" name="txtproprietaire" id="proprietaire">
+                                        <option class="amber-text" selected disabled hidden>Sélectionnez propriétaire</option>
+                                        <c:forEach items="${proprietaires}" var="prop">
+                                            <option class="amber-text" value="${prop.idProprietaire}">${prop.nomProprietaire} ${prop.prenomProprietaire}</option>
+                                        </c:forEach>
+                                    </select></div>
+                                </div>
+                                <div class="text-center mt-4">
+                                    <button type="submit" name="bt" class="btn btn-default">Ajouter</button>
+                                    <button type="reset" name="bt" class="btn btn-default">RAZ</button>
+                                    <hr class="hr-light mb-3 mt-4">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-        <button type="submit" name="bt" class="btn btn-default">Ajouter</button>
-        <button type="reset" name="bt" class="btn btn-default">RAZ</button>
-    </FORM>
-</DIV>
+    </div>
+</header>
+<jsp:include page="footer.jsp"/>
 </body>
 </html>
