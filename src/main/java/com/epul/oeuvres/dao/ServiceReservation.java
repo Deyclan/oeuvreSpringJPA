@@ -46,7 +46,7 @@ public class ServiceReservation extends EntityService {
         return reservation;
     }
 
-    public void updateReservation(ReservationEntity uneReservation) {
+    public void confirmerReservation(ReservationEntity uneReservation) {
         try {
             EntityTransaction transaction = startTransaction();
             transaction.begin();

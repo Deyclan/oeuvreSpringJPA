@@ -80,6 +80,7 @@ public class ReservationEntity {
         return result;
     }
 
+    @MapsId("idOeuvrevente")
     @ManyToOne
     @JoinColumn(name = "id_oeuvrevente", referencedColumnName = "id_oeuvrevente", nullable = false)
     public OeuvreventeEntity getOeuvreventeByIdOeuvrevente() {
@@ -90,6 +91,7 @@ public class ReservationEntity {
         this.oeuvreventeByIdOeuvrevente = oeuvreventeByIdOeuvrevente;
     }
 
+    @MapsId("idAdherent")
     @ManyToOne
     @JoinColumn(name = "id_adherent", referencedColumnName = "id_adherent", nullable = false)
     public AdherentEntity getAdherentByIdAdherent() {
