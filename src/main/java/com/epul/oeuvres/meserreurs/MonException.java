@@ -1,20 +1,20 @@
 package com.epul.oeuvres.meserreurs;
 
-public class MonException  extends Exception  {
+public class MonException extends Exception {
     private String message;
     private String type;
 
     public MonException() {
     }
 
-    public MonException( String libelle,  String type) {
+    public MonException(String libelle, String type) {
         this.message = libelle;
         this.type = type;
     }
 
-    public MonException( String libelle) {
+    public MonException(String libelle) {
         this.message = libelle;
-       
+
     }
 
     public String getMessage() {
@@ -32,5 +32,5 @@ public class MonException  extends Exception  {
     public void setType(String type) {
         this.type = type;
     }
-    
+
 }

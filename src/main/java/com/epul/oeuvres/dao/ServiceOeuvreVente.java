@@ -31,6 +31,18 @@ public class ServiceOeuvreVente extends EntityService {
         }
     }
 
+    public void deleteOeuvre(OeuvreventeEntity uneOeuvre){
+        try {
+            EntityTransaction transaction = startTransaction();
+            transaction.begin();
+            entityManager.remove(entityManager.contains(uneOeuvre) ? uneOeuvre : entityManager.merge(uneOeuvre));
+            transaction.commit();
+            entityManager.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public List<OeuvreventeEntity> getListOeuvreVente(){
         List<OeuvreventeEntity> OeuvreVenteList = null;
         try{

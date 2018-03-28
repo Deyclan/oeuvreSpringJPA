@@ -12,8 +12,7 @@ public abstract class EntityService {
     protected EntityManager entityManager;
     protected EntityManagerFactory emf;
 
-    public EntityTransaction startTransaction() throws Exception
-    {
+    public EntityTransaction startTransaction() throws Exception {
         emf = Persistence.createEntityManagerFactory("oeuvresjpa");
         entityManager = emf.createEntityManager();
 

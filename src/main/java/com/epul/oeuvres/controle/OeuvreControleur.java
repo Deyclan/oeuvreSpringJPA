@@ -1,10 +1,7 @@
 package com.epul.oeuvres.controle;
 
-import com.epul.oeuvres.dao.ServiceAdherent;
-import com.epul.oeuvres.dao.ServiceOeuvrePret;
 import com.epul.oeuvres.dao.ServiceOeuvreVente;
 import com.epul.oeuvres.dao.ServiceProprietaire;
-import com.epul.oeuvres.metier.AdherentEntity;
 import com.epul.oeuvres.metier.OeuvreventeEntity;
 import com.epul.oeuvres.metier.ProprietaireEntity;
 import org.springframework.stereotype.Controller;
@@ -17,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class OeuvreControleur {
 
-    @RequestMapping( value = "gererOeuvre")
+    @RequestMapping(value = "gererOeuvre")
     public ModelAndView gererOeuvre(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String destinationPage = "";
         try {
@@ -29,7 +26,7 @@ public class OeuvreControleur {
         return new ModelAndView(destinationPage);
     }
 
-    @RequestMapping( value = "ajouterOeuvre")
+    @RequestMapping(value = "ajouterOeuvre")
     public ModelAndView ajouterOeuvre(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String destinationPage;
         try {
@@ -43,7 +40,7 @@ public class OeuvreControleur {
         return new ModelAndView(destinationPage);
     }
 
-    @RequestMapping( value = "insererOeuvre")
+    @RequestMapping(value = "insererOeuvre")
     public ModelAndView insererOeuvre(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String destinationPage;
         try {
@@ -64,7 +61,7 @@ public class OeuvreControleur {
         return new ModelAndView(destinationPage);
     }
 
-    @RequestMapping( value = "listerOeuvre")
+    @RequestMapping(value = "listerOeuvre")
     public ModelAndView listerOeuvre(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String destinationPage;
         try {
@@ -78,24 +75,24 @@ public class OeuvreControleur {
         return new ModelAndView(destinationPage);
     }
 
-    @RequestMapping( value = "modifierOeuvre")
+    @RequestMapping(value = "modifierOeuvre")
     public ModelAndView modifierOeuvre(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String destinationPage;
-        try{
+        try {
             ServiceOeuvreVente serviceOeuvreVente = new ServiceOeuvreVente();
             OeuvreventeEntity oeuvre = serviceOeuvreVente.getOeuvreVenteByIdOeuvre(Integer.parseInt(request.getParameter("modif")));
             request.setAttribute("oeuvreAModifier", oeuvre);
             ServiceProprietaire serviceProprietaire = new ServiceProprietaire();
             request.setAttribute("proprietaires", serviceProprietaire.getListProprietaire());
             destinationPage = "modifierOeuvre";
-        } catch (Exception e){
+        } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "Erreur";
         }
         return new ModelAndView(destinationPage);
     }
 
-    @RequestMapping( value = "sauvegarderOeuvre")
+    @RequestMapping(value = "sauvegarderOeuvre")
     public ModelAndView sauvegarderOeuvre(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String destinationPage;
         try {
@@ -115,5 +112,19 @@ public class OeuvreControleur {
         return new ModelAndView(destinationPage);
     }
 
-
+    @RequestMapping(value = "supprimerOeuvre")
+    public ModelAndView supprimerOeuvre(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String destinationPage;
+        try {
+            ServiceOeuvreVente serviceOeuvreVente = new ServiceOeuvreVente();
+            int idOeuvre = Integer.parseInt(request.getParameter("suppr"));
+            OeuvreventeEntity uneOeuvre = serviceOeuvreVente.getOeuvreVenteByIdOeuvre(idOeuvre);
+            serviceOeuvreVente.deleteOeuvre(uneOeuvre);
+            destinationPage = "accueil";
+        } catch (Exception e) {
+            request.setAttribute("MesErreurs", e.getMessage());
+            destinationPage = "Erreur";
+        }
+        return new ModelAndView(destinationPage);
+    }
 }

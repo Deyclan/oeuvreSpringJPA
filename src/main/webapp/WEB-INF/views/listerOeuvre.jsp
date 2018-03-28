@@ -38,10 +38,13 @@
                                 <td class="col">${oeuvre.proprietaire.getNomProprietaire()} ${oeuvre.proprietaire.getPrenomProprietaire()}</td>
                                 <td class="col">
                                     <form method="post">
-                                    <button type="submit" name="reserv" value="${oeuvre.idOeuvrevente}" formaction="ajouterReservation"
-                                            class="btn purple-gradient btn-sm ${(oeuvre.etatOeuvrevente=="L")? "active":"disabled"}">Réserver</button>
-                                    <button type="submit" name="modif" value="${oeuvre.idOeuvrevente}" formaction="modifierOeuvre"
-                                            class="btn peach-gradient btn-sm">Modifier</button>
+                                        <button type="submit" name="reserv" value="${oeuvre.idOeuvrevente}" formaction="ajouterReservation"
+                                                class="btn purple-gradient btn-sm ${(oeuvre.etatOeuvrevente=="L")? "active":"disabled"}">Réserver</button>
+                                        <button type="submit" name="modif" value="${oeuvre.idOeuvrevente}" formaction="modifierOeuvre"
+                                                class="btn aqua-gradient btn-sm">Modifier</button>
+                                        <button type="submit" name="suppr" value="${oeuvre.idOeuvrevente}" formaction="supprimerOeuvre"
+                                                onclick="confirm('Vous êtes sûr de vouloir supprimer cette oeuvre?')"
+                                                class="btn peach-gradient btn-sm">Supprimer</button>
                                     </form>
                                 </td>
                             </tr>
