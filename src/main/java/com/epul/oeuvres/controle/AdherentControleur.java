@@ -38,7 +38,8 @@ public class AdherentControleur {
             adherent.setVilleAdherent(request.getParameter("txtville"));
             ServiceAdherent serviceAdherent = new ServiceAdherent();
             serviceAdherent.insertAdherent(adherent);
-            destinationPage = "index";
+            request.setAttribute("mesAdherents", serviceAdherent.getListAdherent());
+            destinationPage = "listerAdherent";
         } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "Erreur";
@@ -84,7 +85,8 @@ public class AdherentControleur {
             adherent.setPrenomAdherent(request.getParameter("txtprenom"));
             adherent.setVilleAdherent(request.getParameter("txtville"));
             serviceAdherent.updateAdherent(adherent);
-            destinationPage = "index";
+            request.setAttribute("mesAdherents", serviceAdherent.getListAdherent());
+            destinationPage = "listerAdherent";
         } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "Erreur";
@@ -99,7 +101,8 @@ public class AdherentControleur {
             ServiceAdherent serviceAdherent = new ServiceAdherent();
             AdherentEntity adherent = serviceAdherent.getAdherentById(Integer.parseInt(request.getParameter("supprimer")));
             serviceAdherent.deleteAdherent(adherent);
-            destinationPage = "index";
+            request.setAttribute("mesAdherents", serviceAdherent.getListAdherent());
+            destinationPage = "listerAdherent";
         }
         catch (Exception e){
             request.setAttribute("MesErreurs", e.getMessage());
