@@ -53,7 +53,8 @@ public class OeuvreControleur {
             uneOeuvre.setProprietaire(myP);
             ServiceOeuvreVente serviceOeuvreVente = new ServiceOeuvreVente();
             serviceOeuvreVente.insertOeuvreVente(uneOeuvre);
-            destinationPage = "accueil";
+            request.setAttribute("mesOeuvres", serviceOeuvreVente.getListOeuvreVente());
+            destinationPage = "listerOeuvre";
         } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "Erreur";
@@ -104,7 +105,8 @@ public class OeuvreControleur {
             ProprietaireEntity myP = servP.getProprietaireById(Integer.parseInt(request.getParameter("txtproprietaire")));
             uneOeuvre.setProprietaire(myP);
             serviceOeuvre.updateOeuvre(uneOeuvre);
-            destinationPage = "accueil";
+            request.setAttribute("mesOeuvres", serviceOeuvre.getListOeuvreVente());
+            destinationPage = "listerOeuvre";
         } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "Erreur";
@@ -119,7 +121,8 @@ public class OeuvreControleur {
             ServiceOeuvreVente serviceOeuvreVente = new ServiceOeuvreVente();
             OeuvreventeEntity uneOeuvre = serviceOeuvreVente.getOeuvreVenteByIdOeuvre(Integer.parseInt(request.getParameter("suppr")));
             serviceOeuvreVente.deleteOeuvre(uneOeuvre);
-            destinationPage = "accueil";
+            request.setAttribute("mesOeuvres", serviceOeuvreVente.getListOeuvreVente());
+            destinationPage = "listerOeuvre";
         } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "Erreur";
