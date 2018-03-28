@@ -50,8 +50,8 @@ public class ServiceReservation extends EntityService {
         try {
             EntityTransaction transaction = startTransaction();
             transaction.begin();
-            // TODO update method ? (like persist for insert)
             entityManager.merge(uneReservation);
+            transaction.commit();
             entityManager.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -62,8 +62,8 @@ public class ServiceReservation extends EntityService {
         try {
             EntityTransaction transaction = startTransaction();
             transaction.begin();
-            // TODO delete method ? (like persist for insert)
             entityManager.remove(reservation);
+            transaction.commit();
             entityManager.close();
         }catch (Exception e){
             e.printStackTrace();

@@ -24,6 +24,7 @@ public class ServiceOeuvreVente extends EntityService {
             EntityTransaction transaction = startTransaction();
             transaction.begin();
             entityManager.merge(uneOeuvre);
+            transaction.commit();
             entityManager.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -59,11 +60,12 @@ public class ServiceOeuvreVente extends EntityService {
 
     public void changeEtatOeuvreVente(OeuvreventeEntity uneOeuvre) {
         try {
-            String etat = uneOeuvre.getEtatOeuvrevente() == "L" ? "R" : "L";
+            String etat = uneOeuvre.getEtatOeuvrevente().equals("L") ? "R" : "L";
+            uneOeuvre.setEtatOeuvrevente(etat);
             EntityTransaction transaction = startTransaction();
             transaction.begin();
-            // TODO update method ? (like persist for insert)
             entityManager.merge(uneOeuvre);
+            transaction.commit();
             entityManager.close();
         } catch (Exception e) {
             e.printStackTrace();

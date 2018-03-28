@@ -83,10 +83,10 @@ public class OeuvreControleur {
         String destinationPage;
         try{
             ServiceOeuvreVente serviceOeuvreVente = new ServiceOeuvreVente();
-            OeuvreventeEntity uneO = serviceOeuvreVente.getOeuvreVenteByIdOeuvre(Integer.parseInt(request.getParameter("modif")));
-            request.setAttribute("oeuvreAModifier", uneO);
-            ServiceProprietaire servP = new ServiceProprietaire();
-            request.setAttribute("proprietaires", servP.getListProprietaire());
+            OeuvreventeEntity oeuvre = serviceOeuvreVente.getOeuvreVenteByIdOeuvre(Integer.parseInt(request.getParameter("modif")));
+            request.setAttribute("oeuvreAModifier", oeuvre);
+            ServiceProprietaire serviceProprietaire = new ServiceProprietaire();
+            request.setAttribute("proprietaires", serviceProprietaire.getListProprietaire());
             destinationPage = "modifierOeuvre";
         } catch (Exception e){
             request.setAttribute("MesErreurs", e.getMessage());
@@ -99,14 +99,14 @@ public class OeuvreControleur {
     public ModelAndView sauvegarderOeuvre(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String destinationPage;
         try {
-            ServiceOeuvreVente servO = new ServiceOeuvreVente();
-            OeuvreventeEntity uneOeuvre = servO.getOeuvreVenteByIdOeuvre(Integer.parseInt(request.getParameter("txtIDOeuvre")));
+            ServiceOeuvreVente serviceOeuvre = new ServiceOeuvreVente();
+            OeuvreventeEntity uneOeuvre = serviceOeuvre.getOeuvreVenteByIdOeuvre(Integer.parseInt(request.getParameter("txtIDOeuvre")));
             uneOeuvre.setTitreOeuvrevente(request.getParameter("txttitre"));
             uneOeuvre.setPrixOeuvrevente(Float.parseFloat(request.getParameter("txtprix")));
             ServiceProprietaire servP = new ServiceProprietaire();
             ProprietaireEntity myP = servP.getProprietaireById(Integer.parseInt(request.getParameter("txtproprietaire")));
             uneOeuvre.setProprietaire(myP);
-            servO.updateOeuvre(uneOeuvre);
+            serviceOeuvre.updateOeuvre(uneOeuvre);
             destinationPage = "accueil";
         } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());

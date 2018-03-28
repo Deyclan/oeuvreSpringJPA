@@ -84,6 +84,7 @@ public class MultiControleur {
         }
 	    return new ModelAndView(destinationPage);
     }
+
     @RequestMapping(value = "seDeconnecter", method = RequestMethod.POST)
     public ModelAndView deconnexion(HttpServletRequest request, HttpServletResponse response) throws Exception {
         // TODO : session quit?
