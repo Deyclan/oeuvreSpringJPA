@@ -39,7 +39,8 @@
                                     <INPUT type="number" step="0.01" min="0" class="form-control amber-text" name="txtprix" id="prix" value="${oeuvreAModifier.prixOeuvrevente}">
                                 </div>
                                 <div>
-                                    <select class="form-control" name="txtproprietaire" id="proprietaire">
+                                    <br/>
+                                    <select class="form-control browser-default" name="txtproprietaire" id="proprietaire">
                                         <option class="amber-text" disabled hidden>Sélectionnez propriétaire</option>
                                         <c:forEach items="${proprietaires}" var="prop">
                                             <option class="amber-text" ${(oeuvreAModifier.proprietaire.getIdProprietaire() == prop.idProprietaire)? "selected": ""}
